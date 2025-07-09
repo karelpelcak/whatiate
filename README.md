@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# what i eat
 
-## Getting Started
+Moderní Next.js aplikace pro logování jídel s makroživinami a Supabase backendem.
 
-First, run the development server:
+## Nastavení Supabase
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+1. Vytvořte projekt na [Supabase](https://supabase.com/).
+2. Vytvořte tabulku `meals` v SQL editoru:
+
+```sql
+create table meals (
+  id serial primary key,
+  image_url text not null,
+  calories integer not null,
+  protein integer not null,
+  carbs integer not null,
+  fat integer not null,
+  created_at timestamp with time zone default timezone('utc'::text, now())
+);
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Získejte hodnoty `Project URL` a `anon public key` v nastavení projektu.
+4. Vytvořte soubor `.env.local` v rootu projektu:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+NEXT_PUBLIC_SUPABASE_URL=... (váš Supabase URL)
+NEXT_PUBLIC_SUPABASE_ANON_KEY=... (váš anon key)
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+5. Nainstalujte závislosti:
 
-## Learn More
+```
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+6. Spusťte vývojový server:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Funkce
+- Google přihlášení (NextAuth.js)
+- Upload fotky jídla a ruční zadání makroživin
+- Ukládání jídel do Supabase (Postgres)
+- Dashboard s přehledem jídel
+- Moderní UI (TailwindCSS)
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Pokud potřebujete pomoc, napište!
